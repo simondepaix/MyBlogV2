@@ -34,7 +34,9 @@ const AVAIABLE_ROUTES = [
 </code>
 Bien entendu, il faudra revoir le router / dispatcher puisque le tableau à été mis à jour
 Lorsque l'on va cliquer sur un article, celui ci redirige vers l'article en question.
-- Mettre en place les liens des articles pour qu'ils redirigent vers ?page=post&id=1
-- Mettre en place le controller qui va s'occuper d'appeler la méthode getPostById 
-- Mettre en place le la méthode getPostById
-- Revoir le routing pour prendre en compte le param id
+<ul>
+<li>Mettre en place les liens des articles pour qu'ils redirigent vers ?page=post&id=1</li>
+<li>Mettre en place le controller qui va s'occuper d'appeler la méthode getPostById </li>
+<li>Mettre en place le la méthode getPostById</li>
+<li>Revoir le routing pour prendre en compte le param id</li>
+</ul>
