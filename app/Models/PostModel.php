@@ -9,13 +9,8 @@ class PostModel{
     private $user_id;
     
     public function getPosts($limit){
-        try {
-            $dbh = new PDO('mysql:host=localhost;dbname=myblog', 'root', 'root');            
-        } catch (PDOException $e) {
-            print "Erreur !: " . $e->getMessage() . "<br/>";
-            die();
-        }
-
+        require '../app/Utility/DataBase.php';        
+        $dbh = DataBase::connectPDO();        
         if(!empty($limit)){
             $query = $dbh->prepare('SELECT * FROM posts LIMIT '.$limit);
         }else{
@@ -142,10 +137,9 @@ class PostModel{
     /**
      * Set the value of user_id
      */
-    public function setUserId($user_id): self
+    public function setUserId($user_id)
     {
         $this->user_id = $user_id;
-
-        return $this;
+        
     }
 }

@@ -5,7 +5,7 @@
 Dans notre PostModel, nous faisont la connexion à la bdd directement dans nos méthodes. 
 Ce n'est pas correct car on fait de la duplication de code et potentiellement des connexion simultanées.
 Notre DataBase mérite sa propre classe, mais ce n'est ni un controller, ni une view, ni un model
-- Nous allons donc créer un Dossier Utility
+- Nous allons donc créer un Dossier Utility dans le dossier App
 - Dans ce dossier, nous allons créer un fichier DataBase.php
 - Ce fichier aura 2 propriétés : $dsn et $instance
 - Ce fichier sera une classe qui va s'occuper de :
