@@ -4,7 +4,7 @@
 ## consignes : 
 Nous pouvons désormais naviguer entre les différentes pages, mais les données de blog sur la home page sont encore fictives.
 - Nous allons donc mettre en place la BDD en s'appuyant sur le mcd suivant :
-[![alt text]([https://raw.githubusercontent.com/simondepaix/MyBlog/myblog-partie5/mcd_bdd.png?token=GHSAT0AAAAAACEXIKXUEHOYGYO54FEQKFCIZGIYULQ](https://github.com/simondepaix/MyBlogV2/blob/myblog-partie5/mcd_bdd.png))](https://github.com/simondepaix/MyBlogV2/blob/myblog-partie5/mcd_bdd.png)
+<img src="https://github.com/simondepaix/MyBlogV2/blob/myblog-partie5/mcd_bdd.png">
 
 une fois fais, voici des données fictives que vous pouvez insérer dans la table posts :
 <pre>
