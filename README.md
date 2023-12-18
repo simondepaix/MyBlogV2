@@ -1,23 +1,27 @@
 # Ce TP à pour but d'introduire au concept MVC et POO en php. Nous allons créer un blog en partant d'une base bootstrap.
 
-# MyBlog partie 9
+# MyBlog partie 10
 ## consignes : 
-Fichiers .htaccess. allons réécrire les urls qui actuellement ne sont pas très optimisées avec les params directement dans l'url
-- créer le fichier .htaccess au niveau de index.php et collez le code suivant :
-<pre>
- RewriteEngine On
-RewriteBase /Programation/jour13/public/
-
-# Réécrire les URLs pour les pages de posts avec ID
-RewriteRule ^post/id/([0-9]*|js|css)$ index.php?page=post&id=$1 [QSA,L]
-
-# Réécrire toutes les URLs vers index.php
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php?page=$1 [QSA,L]
-
-</pre>
-Vous allez peut être devoir trouver une solution pour que les assets soient bien chargés sur n'importe quelle page.
-
-- Créez un fichier .htaccess à mettre dans le dossier app afin de protéger notre code "sensible" avec le code suivant :
-DENY FROM ALL
+Dans notre PostModel, nous faisont la connexion à la bdd directement dans nos méthodes. 
+Ce n'est pas correct car on fait de la duplication de code et potentiellement des connexion simultanées.
+Notre DataBase mérite sa propre classe, mais ce n'est ni un controller, ni une view, ni un model
+- Nous allons donc créer un Dossier Utility
+- Dans ce dossier, nous allons créer un fichier DataBase.php
+- Ce fichier aura 2 propriétés : $dsn et $instance
+- Ce fichier sera une classe qui va s'occuper de :
+    - Récupérer un fichier de config comprenant nos informations de connexion BDD, vous pouvez utiliser la fonction parse_ini_file pour récupérer les data de ce fichier
+    - Connexion PDO avec le try catch que l'on à déjà vu dans le constructeur
+    - Une méthode static connectPDO accessible partout qui va vérifer si une instance de cette classe existe déjà ou non :
+      <code>
+    public static function connectPDO()
+        {
+            // on vérifie si une instance existe déjà, sinon on la créé
+        if (empty(self::$_instance)) {
+            self::$_instance = new Database();
+        }
+        return self::$_instance->dbh;
+    }
+  </code>
+    - Il faudra ensuite créer le fichier config.ini qui contient les information de la bdd
+    - N'oubliez pas de le mettre dans le gitignore car c'est une erreur de sécurité !
+    - Remplacez les connexions classiques des models par notre nouvelle connexion
