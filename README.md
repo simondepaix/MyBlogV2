@@ -17,7 +17,7 @@ Notre DataBase mérite sa propre classe, mais ce n'est ni un controller, ni une 
         {
             // on vérifie si une instance existe déjà, sinon on la créé
         if (empty(self::$_instance)) {
-            self::$_instance = new Database();
+            self::$_instance = new DataBase();
         }
         return self::$_instance->dbh;
     }
