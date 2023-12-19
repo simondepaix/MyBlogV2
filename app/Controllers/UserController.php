@@ -11,7 +11,8 @@ class UserController extends MainController{
         
     }
     
-    public function register(){
+    public function register(){            
+
         // filter input permet de faire le if isset sans faire pleins de conditions
         
         $email = filter_input(INPUT_POST, 'email',FILTER_SANITIZE_EMAIL);
@@ -34,6 +35,7 @@ class UserController extends MainController{
         if(!empty($errors)){   
             $this->data['errors'] = $errors;       
         }else{            
+            require __DIR__.'/../Models/UserModel.php'; 
             // Création du mot de passe hashé
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
             // Création de l'objet user

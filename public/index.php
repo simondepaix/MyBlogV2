@@ -6,6 +6,7 @@ require '../app/Controllers/HomeController.php';
 require '../app/Controllers/ContactController.php';
 require '../app/Controllers/AboutController.php';
 require '../app/Controllers/PostController.php';
+require '../app/Controllers/UserController.php';
 
 // Variable contenant les routes dispo
 const AVAIABLE_ROUTES = [
