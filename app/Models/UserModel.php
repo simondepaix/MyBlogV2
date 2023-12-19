@@ -1,109 +1,143 @@
 <?php
 
+
 class UserModel
 {
-    // Propriétés représentant les données d'un utilisateur
-    private $id; // ID de l'utilisateur
-    private $name; // Nom de l'utilisateur
-    private $email; // Adresse email de l'utilisateur
-    private $password; // Mot de passe de l'utilisateur (Attention: stockage en clair dans cet exemple, à éviter en production)
-    private $role; // Rôle de l'utilisateur (peut être administrateur, utilisateur standard, etc.)
+    private $id;
+    private $name;
+    private $email;
+    private $password;
+    private $role;
 
-    // Méthode pour enregistrer un utilisateur dans la base de données
     public function registerUser()
     {
-        // Connexion à la base de données en utilisant la classe DataBase
+
         $pdo = DataBase::connectPDO();
 
-        // Requête SQL pour insérer un nouvel utilisateur dans la table 'users'
-        $sql = "INSERT INTO `users`(`name`, `email`, `password`) VALUES (:name,:email,:password)";
+        $sql = "INSERT INTO `users`(`name`, `email`, `password`,`role`) VALUES (:name,:email,:password,:role)";
 
-        // Préparation de la requête avec PDO
         $pdoStatement = $pdo->prepare($sql);
-
-        // Paramètres à lier à la requête préparée
         $params = [
             ':name' => $this->name,
             ':email' => $this->email,
             ':password' => $this->password,
+            ':role' => $this->role,
         ];
-
-        // Exécution de la requête avec les paramètres
         $success = $pdoStatement->execute($params);
  
-        // Retourne un booléen indiquant le succès de l'opération d'insertion
         return $success;
     }
 
-    // Méthode pour vérifier si un email est déjà utilisé par un utilisateur existant
     public function checkEmail()
-    {
-        // Connexion à la base de données en utilisant la classe DataBase
+    {        
         $pdo = DataBase::connectPDO();
 
-        // Requête SQL pour compter le nombre d'utilisateurs avec l'email donné
         $sql = "SELECT COUNT(*) FROM `users` WHERE `email` = :email";
-        $query = $pdo->prepare($sql);
         
-        // Liaison du paramètre :email à la variable $this->email de l'instance actuelle
+        $query = $pdo->prepare($sql);        
         $query->bindParam(':email', $this->email);
-        $query->execute();
         
-        // Récupération du résultat : nombre d'utilisateurs ayant l'email donné
-        $isMail = $query->fetchColumn();     
-           
-        // Retourne un booléen indiquant si l'email est déjà utilisé (vrai si > 0)
+        $query->execute();
+        $isMail = $query->fetchColumn();             
         return $isMail > 0;
     }
 
-    // Méthodes pour récupérer et définir les valeurs des propriétés (accès aux données encapsulées)
+    public static function getUserByEmail($email)
+    {
 
+        $pdo = DataBase::connectPDO();
+
+        // requête SQL
+        $sql = '
+        SELECT * 
+        FROM users
+        WHERE email = :email';        
+        $query = $pdo->prepare($sql);
+        // on exécute la requête en donnant à PDO la valeur à utiliser pour remplacer ':email'
+        $query->execute([':email' => $email]);
+        // on récupère le résultat sous la forme d'un objet de la classe AppUser
+        $result = $query->fetchObject('UserModel');
+
+        // on renvoie le résultat
+        return $result;
+    }
+
+
+    /**
+     * Get the value of id
+     */
     public function getId()
     {
         return $this->id;
     }
 
-    public function setId($id): self
+    /**
+     * Set the value of id
+     */
+    public function setId($id)
     {
-        $this->id = $id;
-        return $this;
+        $this->id = $id;        
     }
 
+    /**
+     * Get the value of name
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * Set the value of name
+     */
     public function setName($name)
     {
         $this->name = $name;        
     }
 
+    /**
+     * Get the value of email
+     */
     public function getEmail()
     {
         return $this->email;
     }
 
+    /**
+     * Set the value of email
+     */
     public function setEmail($email)
     {
         $this->email = $email;
     }
 
+    /**
+     * Get the value of password
+     */
     public function getPassword()
     {
         return $this->password;
     }
 
+    /**
+     * Set the value of password
+     */
     public function setPassword($password)
     {
         $this->password = $password;
     }
 
+    /**
+     * Get the value of role
+     */
     public function getRole()
     {
         return $this->role;
     }
 
+    /**
+     * Set the value of role
+     */
     public function setRole($role)
     {
         $this->role = $role;

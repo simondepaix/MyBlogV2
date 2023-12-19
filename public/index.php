@@ -27,11 +27,11 @@ const AVAIABLE_ROUTES = [
         'controller' => 'PostController'
     ],
     'login'=>[
-        'action' => 'render',
-        'controller' => 'MainController'
+        'action' => 'renderUser',
+        'controller' => 'UserController'
     ],
     'register'=>[
-        'action' => 'renderRegister',
+        'action' => 'renderUser',
         'controller' => 'UserController'
     ],
     '404'=>[
