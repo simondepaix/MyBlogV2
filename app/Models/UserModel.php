@@ -62,6 +62,26 @@ class UserModel
         return $result;
     }
 
+    public static function getUserById($id)
+    {
+
+        $pdo = DataBase::connectPDO();
+
+        // requête SQL
+        $sql = '
+        SELECT * 
+        FROM users
+        WHERE id = :id';        
+        $query = $pdo->prepare($sql);
+        // on exécute la requête en donnant à PDO la valeur à utiliser pour remplacer ':email'
+        $query->execute([':id' => $id]);
+        // on récupère le résultat sous la forme d'un objet de la classe AppUser
+        $result = $query->fetchObject('UserModel');
+
+        // on renvoie le résultat
+        return $result;
+    }
+
 
     /**
      * Get the value of id

@@ -9,7 +9,8 @@ class AdminController extends MainController
 {
     public function renderAdmin(): void
     {
-        require __DIR__.'/../Models/PostModel.php';        
+        $this->checkUserAuthorization(1);
+        require __DIR__.'/../Models/PostModel.php';            
         // pour pouvoir accéder à l'admin, il faut avoir le role n°1. L-On lance donc la méthode pour checker le role du user connecté        
         // s'il ya un formulaire d'envoyé
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
