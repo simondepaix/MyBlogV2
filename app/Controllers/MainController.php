@@ -5,6 +5,8 @@ class MainController{
     protected $id;
     protected $data;
     protected $viewType = 'front';
+    // propriété stockant la sous-page
+    protected $subPage;
     
     public function render(){      
         // ici on explode $_SERVER['request_uri]. ça va séparer l'url à partir du dossier /public/ 
@@ -56,4 +58,19 @@ class MainController{
 
         return $this;
     }
+/**
+    * Get the value of subPage
+    */
+   public function getSubPage(): string
+   {
+       return $this->subPage;
+   }
+   
+   /**
+    * Set the value of subPage
+    */
+   public function setSubPage(?string $value): void
+   {
+       $this->subPage = $value;
+   }
 }

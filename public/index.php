@@ -48,14 +48,13 @@ const AVAIABLE_ROUTES = [
 // initiatilisation des variables
 $page = 'home';
 $controller;
-$itemId=null;
+$subPage=null;
 // s'il y a un param GET page, on le stock dans la var page sinon on redirige vers home
 if(isset($_GET['page']) && !empty($_GET['page'])){    
     $page = $_GET['page'];
-    if(!empty($_GET['id'])){
-        $itemId = $_GET['id'];
+    if(!empty($_GET['subpage'])){
+        $subPage = $_GET['subpage'];        
     }
-
 }else{
     $page = 'home';     
 }
@@ -70,8 +69,13 @@ if(array_key_exists($page,AVAIABLE_ROUTES)){
 }
 
 $pageController = new $controller();
+// On alimente la propriété view du controller avec le nom de la page demandée.
 $pageController->setView($page);
-$pageController->setId($itemId);
+
+// // On alimente la propriété subPage du controller avec le nom de la sous-page demandée. S'il n'y en à pas, elle vaudra simplement null
+$pageController->setSubPage($subPage);
+
+// On appelle la méthode du controller demandée
 $pageController->$controllerAction();
 
 

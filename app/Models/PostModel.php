@@ -8,37 +8,98 @@ class PostModel{
     private $content;
     private $user_id;
     
-    public function getPosts($limit){
-              
-        $dbh = DataBase::connectPDO();        
-        if(!empty($limit)){
-            $query = $dbh->prepare('SELECT * FROM posts LIMIT '.$limit);
-        }else{
-            $query = $dbh->prepare('SELECT * FROM posts');        
+    // méthode pour récupérer tous les articles, il est possible de spécifier une limite
+    public static function getPosts(int $limit = null): array
+    {
+        // connexion pdo avec le pattern singleton
+        $pdo = DataBase::connectPDO();
+        // s'il y'a un param limit
+        if (!empty($limit)) {
+            // alors on fait la requête avec le limit
+            $query = $pdo->prepare('SELECT * FROM posts ORDER BY date DESC LIMIT ' . $limit);
+        } else {
+            // sinon, on fait la requête classique
+            $query = $pdo->prepare('SELECT * FROM posts ORDER BY date DESC');
         }
 
+
         $query->execute();
-        $posts = $query->fetchAll(PDO::FETCH_CLASS,'PostModel');
+        // on fetchAll avec l'option FETCH_CLASS afin d'obtenir un tableau d'objet de type PostModel. 
+        // On pourra ensuite manipuler les propriétés grâce au getters / setters        
+        $posts = $query->fetchAll(PDO::FETCH_CLASS, 'PostModel');
         return $posts;
-     
     }
 
-    public function getPostById($id)
+     // récupération d'un article via son id
+    // : ?PostModel est le typage de retour de la fonction. Ça signifie quelle peut retourner 
+    // soit un objet de type PostModel, soit null
+    public static function getPostById(int $id): ?PostModel
     {
-        try {
-            $dbh = new PDO('mysql:host=localhost;dbname=myblog', 'root', 'root');
-        } catch (PDOException $e) {
-            print "Erreur !: " . $e->getMessage() . "<br/>";
-            die();
-        }        
-        $query = $dbh->prepare('SELECT * FROM posts WHERE id=:id');
-        $params = [
-            'id'=>$id
-        ];
-        $query->execute($params);
+        // connection pdo
+        $pdo = DataBase::connectPDO();
+        // impératif, :id permet d'éviter les injections SQL
+        $query = $pdo->prepare('SELECT * FROM posts WHERE id=:id');
+        // Comme il n'y a qu'un seul param, pas besoin de faire un tableau, on peut utiliser bindParam
+        $query->bindParam(':id', $id);
+        $query->execute();
         $query->setFetchMode(PDO::FETCH_CLASS, 'PostModel');
-        $post = $query->fetch();            
+        // fetch et non fetchAll car on récupère une seule entrée
+        $post = $query->fetch();       
+        if(!$post){
+            $post = null;
+        } 
         return $post;
+    }
+
+
+    public function insertPost(): bool
+    {
+        $pdo = DataBase::connectPDO();                
+        // requête sql protégée des injections sql 
+        $sql = "INSERT INTO `posts`(`title`, `date`, `content`, `img`, `user_id`) VALUES (:title, :date, :content, :img, :user_id)";
+        // associations des bonnes valeurs
+        $params = [
+            'title' => $this->title,
+            'date' => $this->date,
+            'content' => $this->content,
+            'img' => $this->img,
+            'user_id' =>  1
+        ];
+        $query = $pdo->prepare($sql);
+        // execution de la méthode en passant le tableau de params
+        $queryStatus = $query->execute($params);
+        return $queryStatus;
+    }
+
+    public function updatePost(): bool
+    {
+        $pdo = DataBase::connectPDO();
+        // récupération de l'id de l'utilisateur via la superglobale $_SESSION                
+        // requête sql protégée des injections sql 
+        $sql = "UPDATE `posts` SET `title` = :title, `date` = :date, `content` = :content, `img` = :img, `user_id` = :user_id WHERE `id` = :id";
+        // associations des bonnes valeurs
+        $params = [
+            'id' => $this->id,
+            'title' => $this->title,
+            'date' => $this->date,
+            'content' => $this->content,
+            'img' => $this->img,
+            'user_id' =>  1 // temporaire,
+        ];
+        $query = $pdo->prepare($sql);
+        // execution de la méthode en passant le tableau de params
+        $queryStatus = $query->execute($params);
+        return $queryStatus;
+    }
+
+    public static function deletePost(int $postId): bool
+    {
+        $pdo = DataBase::connectPDO();
+        $sql = 'DELETE FROM `posts` WHERE id = :id';
+        $query = $pdo->prepare($sql);
+        $query->bindParam('id', $postId, PDO::PARAM_INT);
+        $queryStatus = $query->execute();
+        return $queryStatus;
     }
 
     /**
