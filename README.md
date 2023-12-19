@@ -2,18 +2,25 @@
 
 # MyBlog partie 10
 ## consignes : 
-Nous avons mis en place l'inscription. Nous allons maintenant mettre en place la connexion.
-# fichier index.php
-- retouchez les routes, login et register vont toutes les deux faire appel à renderUser.
-- RenderUser va donc vérifier si un formulaire à été envoyé et si c'est le formulaire register ou login
-# Dans le fichier UserModel 
-- Créer une methode static getUserByMail qui permet de récupérer un utilisateur par son email.
+Notre utilisateur est maintenant capable de s'inscrire et de se connecter mais il ne peut pas encore accéder à l'interface d'admin. C'est normal, elle n'existe pas encore !
 
-# Dans le fichier UserController :
-- Créez une méthode login. 
+# index.php
+- ajoutez la route vers le bon controller
 
-## method login
-- Récupère l'utilisateur via son email grâce à la méthode getUserByEmail
-- Vérifie son mot de passe avec la fonctionn php password_verify
-- Si tout est bon, on créé une session dans laquelle on stock l'id de l'utilisateur
+# AdminController
+- Créez un fichier AdminController qui aura une méthode renderAdmin.
+- la méthode renderAdmin devra appeler render comme tous les autres controller mais elle va également définir une nouvelle propriété du main controller dont elle hérite en $this->viewType = 'admin'; Pourquoi ? tout simplement car le layout de l'interface d'admin est complètement différent de celui du front. Nous allons donc séparer le dossier views/front et views/Admin
+
+# Dossiers
+- Créer un dossier admin dans views qui contiendra les fichiers layouts et partials
+- Récupérez aussi les dossiez public/admin
+# MainController
+- Ajoutez la propriété protected $viewType = 'front'; (de base elle vaut front). Retouchez le render pour prendre en compte le viewType et changer dynamiquement de dossier. Vous devriez avoir quelquechose comme ça :
+<code>
+        require __DIR__.'/../views/'.$this->viewType.'/layouts/header.phtml';
+        require __DIR__.'/../views/'.$this->viewType.'/partials/'.$this->view.'.phtml';
+        require __DIR__.'/../views/'.$this->viewType.'/layouts/footer.phtml';
+</code>
+
+
 

@@ -70,31 +70,49 @@ class UserController extends MainController
 
     public function login()
     {
-                
+        // Initialisation du compteur d'erreurs
         $errors = 0;
+    
+        // Inclusion du fichier UserModel.php qui contient la classe UserModel
         require '../app/Models/UserModel.php'; 
+        
+        // Instanciation d'un nouvel objet UserModel
         $user = new UserModel();
+        
+        // Récupération des données de l'utilisateur via la méthode getUserByEmail
         $user = $user->getUserByEmail($_POST['email']);
+        
+        // Affichage des données de l'utilisateur (à des fins de débogage, peut être retiré en production)
         var_dump($user);
-
+    
+        // Vérification si l'utilisateur existe
         if ($user === false) {
             $errors = 1;
         }
-
+    
+        // Vérification du mot de passe en utilisant password_verify
         if (password_verify($_POST['password'], $user->getPassword())) {
-
+    
+            // Si le mot de passe est correct, création d'une session pour l'utilisateur
             $_SESSION['user_id'] = $user->getId();
-
-            $this->data[] =  '<div class="alert alert-success" role="alert">connexion réussie !</div>';
-
+    
+            // Ajout d'un message de succès à afficher à l'utilisateur
+            $this->data[] =  '<div class="alert alert-success" role="alert">Connexion réussie !</div>';
+    
+            // Extraction de l'URI de base en utilisant explode pour la redirection
             $base_uri = explode('index.php', $_SERVER['SCRIPT_NAME']);
-            //header('Location:' . $base_uri[0]);
-
+            // Redirection vers la page d'accueil (peut être activé en décommentant cette ligne)
+            // header('Location:' . $base_uri[0]);
+    
         } else {
+            // Si le mot de passe est incorrect, incrémentation du compteur d'erreurs
             $errors = 1;
         }
+    
+        // Si des erreurs sont détectées, ajout d'un message d'erreur à afficher à l'utilisateur
         if ($errors > 0) {
             $this->data[] = '<div class="alert alert-danger" role="alert">Email ou mot de passe incorrect</div>';
         }
     }
+    
 }
