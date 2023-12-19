@@ -7,6 +7,7 @@ require '../app/Controllers/ContactController.php';
 require '../app/Controllers/AboutController.php';
 require '../app/Controllers/PostController.php';
 require '../app/Controllers/UserController.php';
+require '../app/Controllers/AdminController.php';
 
 // Variable contenant les routes dispo
 const AVAIABLE_ROUTES = [
@@ -33,6 +34,10 @@ const AVAIABLE_ROUTES = [
     'register'=>[
         'action' => 'renderUser',
         'controller' => 'UserController'
+    ],
+    'admin'=>[
+        'action' => 'renderAdmin',
+        'controller' => 'AdminController'
     ],
     '404'=>[
         'action' => 'render',
