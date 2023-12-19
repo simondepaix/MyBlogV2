@@ -3,6 +3,9 @@
 # MyBlog partie 10
 ## consignes : 
 Nous avons mis en place l'inscription. Nous allons maintenant mettre en place la connexion.
+# fichier index.php
+- retouchez les routes, login et register vont toutes les deux faire appel à renderUser.
+- RenderUser va donc vérifier si un formulaire à été envoyé et si c'est le formulaire register ou login
 # Dans le fichier UserModel 
 - Créer une methode static getUserByMail qui permet de récupérer un utilisateur par son email.
 
@@ -11,6 +14,5 @@ Nous avons mis en place l'inscription. Nous allons maintenant mettre en place la
 
 ## method login
 - Récupère l'utilisateur via son email grâce à la méthode getUserByEmail
-- Vérifie son mot de passe avec la foncitn php password_verify
+- Vérifie son mot de passe avec la fonctionn php password_verify
 - Si tout est bon, on créé une session dans laquelle on stock l'id de l'utilisateur
-
