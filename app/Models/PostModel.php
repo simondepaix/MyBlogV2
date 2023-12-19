@@ -54,7 +54,9 @@ class PostModel{
 
     public function insertPost(): bool
     {
-        $pdo = DataBase::connectPDO();                
+        $pdo = DataBase::connectPDO();
+        // récupération de l'id de l'utilisateur via la superglobale $_SESSION
+        $user_id = $_SESSION['user_id'];
         // requête sql protégée des injections sql 
         $sql = "INSERT INTO `posts`(`title`, `date`, `content`, `img`, `user_id`) VALUES (:title, :date, :content, :img, :user_id)";
         // associations des bonnes valeurs
@@ -63,7 +65,7 @@ class PostModel{
             'date' => $this->date,
             'content' => $this->content,
             'img' => $this->img,
-            'user_id' =>  1
+            'user_id' =>  $user_id
         ];
         $query = $pdo->prepare($sql);
         // execution de la méthode en passant le tableau de params
@@ -74,7 +76,8 @@ class PostModel{
     public function updatePost(): bool
     {
         $pdo = DataBase::connectPDO();
-        // récupération de l'id de l'utilisateur via la superglobale $_SESSION                
+        // récupération de l'id de l'utilisateur via la superglobale $_SESSION
+        $user_id = $_SESSION['user_id'];        
         // requête sql protégée des injections sql 
         $sql = "UPDATE `posts` SET `title` = :title, `date` = :date, `content` = :content, `img` = :img, `user_id` = :user_id WHERE `id` = :id";
         // associations des bonnes valeurs
@@ -84,7 +87,7 @@ class PostModel{
             'date' => $this->date,
             'content' => $this->content,
             'img' => $this->img,
-            'user_id' =>  1 // temporaire,
+            'user_id' =>  $user_id
         ];
         $query = $pdo->prepare($sql);
         // execution de la méthode en passant le tableau de params

@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require '../app/Utility/DataBase.php';
 require '../app/Controllers/MainController.php';
 require '../app/Controllers/HomeController.php';
