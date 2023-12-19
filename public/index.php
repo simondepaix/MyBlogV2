@@ -1,13 +1,12 @@
 <?php
-require __DIR__.'/../app/Controllers/MainController.php';
-require __DIR__.'/../app/Controllers/HomeController.php';
-require __DIR__.'/../app/Controllers/ContactController.php';
-require __DIR__.'/../app/Controllers/AboutController.php';
-require __DIR__.'/../app/Controllers/PostController.php';
 
-
-$base_uri = $_SERVER['REQUEST_URI'];
-// on require les fichiers (temporairement)
+require '../app/Utility/DataBase.php';
+require '../app/Controllers/MainController.php';
+require '../app/Controllers/HomeController.php';
+require '../app/Controllers/ContactController.php';
+require '../app/Controllers/AboutController.php';
+require '../app/Controllers/PostController.php';
+require '../app/Controllers/UserController.php';
 
 // Variable contenant les routes dispo
 const AVAIABLE_ROUTES = [
@@ -27,6 +26,14 @@ const AVAIABLE_ROUTES = [
         'action' => 'renderPost',
         'controller' => 'PostController'
     ],
+    'login'=>[
+        'action' => 'render',
+        'controller' => 'MainController'
+    ],
+    'register'=>[
+        'action' => 'renderRegister',
+        'controller' => 'UserController'
+    ],
     '404'=>[
         'action' => 'render',
         'controller' => 'ErrorController'
@@ -45,7 +52,7 @@ if(isset($_GET['page']) && !empty($_GET['page'])){
     }
 
 }else{
-    $page = 'home';    
+    $page = 'home';     
 }
 
 // Si la page demandée fait partie de notre tableau de routes, on la stocke dans la variable controller

@@ -9,7 +9,7 @@ class PostModel{
     private $user_id;
     
     public function getPosts($limit){
-        require '../app/Utility/DataBase.php';        
+              
         $dbh = DataBase::connectPDO();        
         if(!empty($limit)){
             $query = $dbh->prepare('SELECT * FROM posts LIMIT '.$limit);
