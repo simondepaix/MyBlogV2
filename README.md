@@ -2,25 +2,30 @@
 
 # MyBlog partie 10
 ## consignes : 
-Notre utilisateur est maintenant capable de s'inscrire et de se connecter mais il ne peut pas encore accéder à l'interface d'admin. C'est normal, elle n'existe pas encore !
-
-# index.php
-- ajoutez la route vers le bon controller
+L'admin est en place et on peut y accéder depuis l'url  /public/admin. Nous allons mettre en place le fonctionnement des différentes vues. la vue dashboard doit
+- afficher les 10 derniers articles dans le tableau. Il doit y avoir un bouton delete et un bouton update.
+- le bouton delete permet de supprimer l'article en question. 
+- le bouton update dirige vers une page update qui est un formulaire dans lequel chaque champs récupère la valeur de l'article en bdd pour qu'on puisse les modifier. exemple dans le champs title on inject la valeur du titre de l'article. Il faut donc transmettre l'id pour récupérer l'article en bdd.
+- Le bouton add redirige vers un formulaire vierge qui permet d'ajouter un nouvel article.
 
 # AdminController
-- Créez un fichier AdminController qui aura une méthode renderAdmin.
-- la méthode renderAdmin devra appeler render comme tous les autres controller mais elle va également définir une nouvelle propriété du main controller dont elle hérite en $this->viewType = 'admin'; Pourquoi ? tout simplement car le layout de l'interface d'admin est complètement différent de celui du front. Nous allons donc séparer le dossier views/front et views/Admin
+# renderAdmin
+- Toutes les pages liées à l'admin passent par renderAdmin. Il va falloir déterminer quel formulaire à été envoyé entre addpost, delete, update. Celon le formulaire soumis, on appelle la bonne méthode.
+## removePost
+- cette méthode récupère l'id de l'article que l'on souhaite supprimer et appelle la méthode deletPost du modele
+## updatePost
+- cette méthode récupère les valeurs des champs, les tests et les filtres puis appelle le PostModel. Elle appelle ensuite updatePost qui va effectuer la requête SQL.
+## addPost
+cette méthode récupère les valeurs des champs, les tests et les filtres puis appelle le PostModel. Elle appelle ensuite insertPost qui va effectuer la requête SQL.
 
-# Dossiers
-- Créer un dossier admin dans views qui contiendra les fichiers layouts et partials
-- Récupérez aussi les dossiez public/admin
-# MainController
-- Ajoutez la propriété protected $viewType = 'front'; (de base elle vaut front). Retouchez le render pour prendre en compte le viewType et changer dynamiquement de dossier. Vous devriez avoir quelquechose comme ça :
-<code>
-        require __DIR__.'/../views/'.$this->viewType.'/layouts/header.phtml';
-        require __DIR__.'/../views/'.$this->viewType.'/partials/'.$this->view.'.phtml';
-        require __DIR__.'/../views/'.$this->viewType.'/layouts/footer.phtml';
-</code>
-
+# PostModel
+## getPostById
+- méthode permettant de récupérer un article selon son id
+## insertPost
+- méthode permettant d'ajouter un nouvel article en bdd
+## updatePost
+- méthode permettant de mettre à jour l'article selon son id
+## deletPost
+- méthode permettant de supprimer l'article selon son id
 
 
