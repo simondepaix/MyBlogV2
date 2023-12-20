@@ -1,6 +1,6 @@
 # Ce TP à pour but d'introduire au concept MVC et POO en php. Nous allons créer un blog en partant d'une base bootstrap.
 
-# MyBlog partie 10
+# MyBlog partie 13
 ## consignes : 
 Notre utilisateur est maintenant capable de s'inscrire et de se connecter mais il ne peut pas encore accéder à l'interface d'admin. C'est normal, elle n'existe pas encore !
 
