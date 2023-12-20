@@ -1,6 +1,6 @@
 # Ce TP à pour but d'introduire au concept MVC et POO en php. Nous allons créer un blog en partant d'une base bootstrap.
 
-# MyBlog partie 10
+# MyBlog partie 14
 ## consignes : 
 L'admin est en place et on peut y accéder depuis l'url  /public/admin. Nous allons mettre en place le fonctionnement des différentes vues. la vue dashboard doit
 - afficher les 10 derniers articles dans le tableau. Il doit y avoir un bouton delete et un bouton update.
