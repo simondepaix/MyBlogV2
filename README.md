@@ -1,6 +1,6 @@
 # Ce TP à pour but d'introduire au concept MVC et POO en php. Nous allons créer un blog en partant d'une base bootstrap.
 
-# MyBlog partie 10
+# MyBlog partie 15
 ## consignes : 
 Magnifique ! on peut accéder à l'admin et ajoute, modifier, afficher, supprimer un article. Nous avons donc mis en place notre CRUD !!!
 Hum, il y'a quand même quelque chose de pas terrible. N'importe qui peut accéder à notre interface d'admin. Il suffit de modifier l'url et n'importe qui peut supprimer nos articles ou les modifier pour écrire n'importe quoi !
