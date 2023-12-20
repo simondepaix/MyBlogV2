@@ -1,6 +1,6 @@
 # Ce TP à pour but d'introduire au concept MVC et POO en php. Nous allons créer un blog en partant d'une base bootstrap.
 
-# MyBlog partie 10
+# MyBlog partie 12
 ## consignes : 
 Nous avons mis en place l'inscription. Nous allons maintenant mettre en place la connexion.
 # fichier index.php
