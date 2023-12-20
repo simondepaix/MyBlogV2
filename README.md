@@ -21,3 +21,5 @@ Vous allez peut être devoir trouver une solution pour que les assets soient bie
 
 - Créez un fichier .htaccess à mettre dans le dossier app afin de protéger notre code "sensible" avec le code suivant :
 DENY FROM ALL
+- Retouchez les liens pour avoir des urls du type /monsite/home au lieu de monsite/?page=home
+- 
