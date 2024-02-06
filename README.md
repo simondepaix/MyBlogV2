@@ -4,8 +4,8 @@
 ## consignes : 
 Nous n'irons pas plus loin pour le moment dans le TP.
 # récapitulatif :
-Nous pouvons naviguer sur nos différentes pages front. Nous affichons des article récupérés en bdd.
-Nous pouvons nous inscrire et nous connecter. Si l'utilisateur bénéficie du bon role, il peut accéder à l'interface d'admin.
+Nous pouvons naviguer sur nos différentes pages front. Nous affichons des articles récupérés en bdd.
+Nous pouvons nous inscrire et nous connecter. Si l'utilisateur bénéficie du bon rôle, il peut accéder à l'interface d'admin.
 Depuis cet interface, il peut ajouter modifier supprimer un article.
 
 # Suite :
