@@ -14,4 +14,8 @@ footer
 - nous allons également créer autant de controllers qu'il y'a de pages. Ces controllers vont hériter de MainController et aurons donc tous accès à la méthode render()
 - une fois que les controllers sont mis en place, modifier les liens de la barre de navigation pour pouvoir naviguer avec le param page. 
  Exemple : ?page='about'
+
+## tips  : 
+- il est possible de délchencher dynamiquement une variable en ajoutant des parenthèse derrière comme s'il s'agissait d'une fonction / classe exemple:
+  $controllerInstance = new $controller();
     
