@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le : jeu. 08 fév. 2024 à 10:35
+-- Généré le : jeu. 08 fév. 2024 à 10:43
 -- Version du serveur :  5.7.34
 -- Version de PHP : 8.0.8
 
@@ -29,8 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
-  `name` varchar(60) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `name` varchar(60) CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `categories`
@@ -39,7 +39,7 @@ CREATE TABLE `categories` (
 INSERT INTO `categories` (`id`, `name`) VALUES
 (1, 'faune et flore'),
 (2, 'nature'),
-(3, 'rivière');
+(3, 'astronomie');
 
 -- --------------------------------------------------------
 
@@ -81,7 +81,7 @@ INSERT INTO `posts` (`id`, `title`, `date`, `content`, `img`, `user_id`) VALUES
 CREATE TABLE `posts_categories` (
   `post_id` int(11) NOT NULL,
   `categorie_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `posts_categories`
@@ -101,11 +101,11 @@ INSERT INTO `posts_categories` (`post_id`, `categorie_id`) VALUES
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `name` varchar(60) NOT NULL,
-  `email` varchar(60) NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `name` varchar(60) CHARACTER SET latin1 NOT NULL,
+  `email` varchar(60) CHARACTER SET latin1 NOT NULL,
+  `password` varchar(255) CHARACTER SET latin1 NOT NULL,
   `role` int(1) NOT NULL DEFAULT '3'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `users`
@@ -113,18 +113,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `role`) VALUES
 (1, 'John Doe', 'johndoe@gmail.com', 'zofjzoiejgoié\"irjçtàfj\"àeç', 1),
-(75, 'jean', 'jean@gmail.com', '$2y$10$Mbt2kntbTk5Bu7eqFJTPHOrimeBkOCUDMMwM9tqcfyOSZIjiDOdnK', 3),
-(76, 'test', 'test@gmail.com', '$2y$10$gHNbKrmB..R4/4vbHWYsFu63N34M2PlGDYG7lEjocixXzNM4vzyqq', 1),
-(77, 'pierre', 'pierre@gmail.com', '$2y$10$Gp/QFF2BkTC/AYrAlBoLFOeHNbWKiPIl/PwHdT3tLqpzNeOo6pQs.', 3),
 (78, 'Jane', 'jane@mail.com', '$2y$10$/wT578tGCP7PqTG5jeLB4ejPBPLW5EedxLWwGyieedIspv0lvsiRe', 3),
-(79, 'fpozofkopz', 'pzeokfpzeokf@gmail.com', '$2y$10$rFPu4sOteRbWqrALbMDQV.pyEdkpwYcDEKOYNrsjzplSOkGMK23j6', 3),
-(80, 'test3', 'test3@mail.com', '$2y$10$jRh5tSD/EGGdmIHcbLUam.fkg0LjNk3r1JoP99ENGAd3FDTzr4zqO', 3),
-(81, 'test12345', 'test1242352@gmail.com', '$2y$10$RwZ5tpz0t8Oy3tBd1i349.sZzlOuR0Dkzv89SlQ.xPgBDfAHTadCa', 1),
-(82, 'test123456', 'test123456@mail.com', '$2y$10$O7giP4XS3RdO/kzfsWKA5eyxN.mGMhN2ZfygV0NOuazVXuKmcALoi', 1),
-(83, 'test', 'test123456@gmail.com', '$2y$10$E9wEuO7WziCR/FQhU41lo.0H0XgCWiA8LcAEjN7UXUKzY6ZGcNQGO', 1),
-(84, 'zefpoez', 'zepogk@gmail.com', '$2y$10$sgxDJOHEjZ4OKYDu9xftduXIOUn.rP8zBM/jxTbLeQUk4qA8yjjw6', 3),
-(85, 'test', 'test12345678@mail.com', '$2y$10$kQ3bAAS2khf9SJq1nYe5Suy4yGTG5Ub5gw3t/s0K9qO6NX6W.Z11a', 3),
-(86, 'test123456889@mail.com', 'test123456889@mail.com', '$2y$10$7oS0R1G7dX15bDpbKYiPYOaeSpdZzIxUOYRKC9vZorkYEb5UwIwp6', 3);
+(82, 'test123456', 'test123456@mail.com', '$2y$10$O7giP4XS3RdO/kzfsWKA5eyxN.mGMhN2ZfygV0NOuazVXuKmcALoi', 1);
 
 --
 -- Index pour les tables déchargées
