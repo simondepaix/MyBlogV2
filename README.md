@@ -12,7 +12,11 @@ $view
 footer
 
 - nous allons également créer autant de controllers qu'il y'a de pages. Ces controllers vont hériter de MainController et aurons donc tous accès à la méthode render()
-- une fois que les controllers sont mis en place, modifier les liens de la barre de navigation pour pouvoir naviguer avec le param page. 
+- une fois que les controllers sont mis en place :
+   -  Créez une nouvelle instance du bon controller
+   -  attribuer à la propriété $view la valeur de $page au MainController grâce au setter.
+   -  Déclencher la méthode render 
+   -  modifier les liens de la barre de navigation pour pouvoir naviguer avec le param page. 
  Exemple : ?page='about'
 
 ## tips  : 
