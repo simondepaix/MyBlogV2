@@ -5,16 +5,20 @@
 Fichiers .htaccess. allons réécrire les urls qui actuellement ne sont pas très optimisées avec les params directement dans l'url
 - créer le fichier .htaccess au niveau de index.php et collez le code suivant :
 <pre>
- RewriteEngine On
-RewriteBase /Programation/jour13/public/
+RewriteEngine On
+RewriteBase /mydigitalschool_poo/MyBlogV2-myblog-partie3/public/
+
+# Ne pas réécrire les URLs pour les fichiers CSS et JavaScript
+RewriteRule \.(css|js)$ - [L]
 
 # Réécrire les URLs pour les pages de posts avec ID
-RewriteRule ^post/id/([0-9]*|js|css)$ index.php?page=post&id=$1 [QSA,L]
+RewriteRule ^post/id/([0-9]+)$ index.php?page=post&id=$1 [QSA,L]
 
 # Réécrire toutes les URLs vers index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php?page=$1 [QSA,L]
+
 
 </pre>
 Vous allez peut être devoir trouver une solution pour que les assets soient bien chargés sur n'importe quelle page.
