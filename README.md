@@ -11,7 +11,7 @@ Ensuite, nous allons récupérer la data depuis la bdd.
 Cette méthodes doit :  
 - se connecter à la BDD
 - retourner les articles avec PDO
-- Astuce, utilisez fetchAll(PDO::FETCH_CLASS,'PostModel') pour retourner vos articles sous la forme de votre classe
+- Astuce (facultatif), utilisez fetchAll(PDO::FETCH_CLASS,'PostModel') pour retourner vos articles sous la forme de votre classe
 
 Côté controller (pour l'instant dans le main):
 - Appelez la méthode getPosts($limit) et stockez sa valeur de retour dans une variable $data
