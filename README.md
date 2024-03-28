@@ -6,7 +6,7 @@ Fichiers .htaccess. allons réécrire les urls qui actuellement ne sont pas trè
 - créer le fichier .htaccess au niveau de index.php et collez le code suivant :
 <pre>
 RewriteEngine On
-RewriteBase /mydigitalschool_poo/MyBlogV2-myblog-partie3/public/
+RewriteBase /MyBlogV2-myblog-partie3/public/
 
 # Ne pas réécrire les URLs pour les fichiers CSS et JavaScript
 RewriteRule \.(css|js)$ - [L]
